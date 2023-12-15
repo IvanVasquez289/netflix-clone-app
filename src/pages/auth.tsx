@@ -89,19 +89,20 @@ const AuthPage = () => {
                       rounded-full
                       items-center justify-center
                       hover:opacity-80 transition
-                      flex 
+                      flex cursor-pointer
                     "
                   >
                     <FcGoogle size={30}/>
                   </div>
-                  <div 
+                  <div
+                    onClick={() => signIn('github',{callbackUrl:'/'})}
                     className="
                       bg-white 
                       w-10 h-10 
                       rounded-full
                       items-center justify-center
                       hover:opacity-80 transition
-                      flex 
+                      flex cursor-pointer
                     "
                   >
                     <FaGithub size={30}/>
