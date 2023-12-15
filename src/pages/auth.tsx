@@ -83,6 +83,7 @@ const AuthPage = () => {
                 </button>
                 <div className="flex flex-row items-center gap-4 mt-8 justify-center">
                   <div 
+                    onClick={() => signIn('google',{callbackUrl:'/'})}
                     className="
                       bg-white 
                       w-10 h-10 
