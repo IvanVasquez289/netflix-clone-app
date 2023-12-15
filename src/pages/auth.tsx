@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import {signIn} from 'next-auth/react'
 import { useRouter } from "next/router";
+import {FcGoogle} from 'react-icons/fc'
+import {FaGithub} from 'react-icons/fa'
 
 const AuthPage = () => {
   const router = useRouter()
@@ -79,6 +81,32 @@ const AuthPage = () => {
                 <button onClick={variant === 'login' ? login : register} className="bg-red-600 mt-10 w-full text-white py-3 rounded-md hover:bg-red-700 transition">
                   {variant === 'login' ? 'Iniciar sesion' : 'Registrarse'}
                 </button>
+                <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+                  <div 
+                    className="
+                      bg-white 
+                      w-10 h-10 
+                      rounded-full
+                      items-center justify-center
+                      hover:opacity-80 transition
+                      flex 
+                    "
+                  >
+                    <FcGoogle size={30}/>
+                  </div>
+                  <div 
+                    className="
+                      bg-white 
+                      w-10 h-10 
+                      rounded-full
+                      items-center justify-center
+                      hover:opacity-80 transition
+                      flex 
+                    "
+                  >
+                    <FaGithub size={30}/>
+                  </div>
+                </div>
                 <p className=" text-neutral-500 mt-12">
                   {variant === 'login' ? 'Primera vez usando Netflix?' : 'Ya tienes una cuenta?'}
                   <span 
