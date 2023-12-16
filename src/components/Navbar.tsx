@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useCallback, useState } from 'react'
 import NavbarItem from './NavbarItem'
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
@@ -19,7 +19,7 @@ const Navbar = () => {
                 width={'150'} 
                 height={'300'} 
                 alt='logo'
-                // className='h-5 lg:h-7'
+                className='h-5 lg:h-7 w-20'
             />
             <div className='flex-row lg:flex hidden ml-8 gap-7'>
                 <NavbarItem label='Home'/>
@@ -30,9 +30,23 @@ const Navbar = () => {
                 <NavbarItem label='Buscar por categoria'/>
             </div>
             <div onClick={toggleMobileMenu} className='lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative'>
-                <p className=' text-white text-sm'>Buscar</p>
+                <p className=' text-white text-sm'>Navegar</p>
                 <BsChevronDown className='text-white transition'/>
                 <MobileMenu visible={showMobileMenu}/>
+            </div>
+            <div className='flex-grow flex justify-end gap-7 items-center'>
+                <div className='text-gray-200 hover:text-gray-300 cursor-pointer'>
+                    <BsSearch />
+                </div>
+                <div className='text-gray-200 hover:text-gray-300 cursor-pointer'>
+                    <BsBell />
+                </div>
+                <div className='flex flex-row items-center gap-2 cursor-pointer relative'>
+                    <div className='w-6 h-6 lg:h-10 lg:w-10 rounded-md overflow-hidden'>
+                        <Image src={'/images/default-blue.png'} alt='perfil image' width={'100'} height={'100'}/>
+                    </div>
+                    <BsChevronDown className='text-white transition'/>
+                </div>
             </div>
         </div>
     </nav>
