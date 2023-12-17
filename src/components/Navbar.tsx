@@ -1,13 +1,31 @@
 import Image from 'next/image'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState,useEffect } from 'react'
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import NavbarItem from './NavbarItem'
 import MobileMenu from './MobileMenu';
 import AccountMenu from './AccountMenu';
 
+const TOP_OFFSET = 60;
+
 const Navbar = () => {
   const [showMobileMenu,setShowMobileMenu] = useState(false);
   const [showAccountMenu,setShowAccountMenu] = useState(false);
+  const [showBackground, setShowBackground] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+        if(window.scrollY >= TOP_OFFSET){
+            setShowBackground(true)
+        }else{
+            setShowBackground(false)
+        }
+    }
+    window.addEventListener('scroll',handleScroll)
+    return () => {
+        window.removeEventListener('scroll',handleScroll)
+    }
+  }, [])
+  
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu(currentValue => !currentValue)
@@ -20,7 +38,10 @@ const Navbar = () => {
 
   return (
     <nav className='w-full fixed z-40'>
-        <div className='bg-zinc-900 bg-opacity-90 px-4 md:px-16 py-6 flex flex-row items-center transition duration-500'>
+        <div 
+            className={`${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''} 
+            px-4 md:px-16 py-6 flex flex-row items-center transition duration-500`}
+        >
             <Image 
                 src={'/images/logo.png'} 
                 width={'150'} 
