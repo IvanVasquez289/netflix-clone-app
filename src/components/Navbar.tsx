@@ -1,15 +1,22 @@
 import Image from 'next/image'
 import React, { useCallback, useState } from 'react'
-import NavbarItem from './NavbarItem'
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
+import NavbarItem from './NavbarItem'
 import MobileMenu from './MobileMenu';
+import AccountMenu from './AccountMenu';
 
 const Navbar = () => {
   const [showMobileMenu,setShowMobileMenu] = useState(false);
+  const [showAccountMenu,setShowAccountMenu] = useState(false);
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu(currentValue => !currentValue)
   },[])
+
+  const toggleAccountMenu = useCallback(() => {
+    setShowAccountMenu(currentValue => !currentValue)
+  },[])
+
 
   return (
     <nav className='w-full fixed z-40'>
@@ -31,7 +38,7 @@ const Navbar = () => {
             </div>
             <div onClick={toggleMobileMenu} className='lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative'>
                 <p className=' text-white text-sm'>Navegar</p>
-                <BsChevronDown className='text-white transition'/>
+                <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-180' : 'rotate-0'}`} />
                 <MobileMenu visible={showMobileMenu}/>
             </div>
             <div className='flex-grow flex justify-end gap-7 items-center'>
@@ -42,10 +49,14 @@ const Navbar = () => {
                     <BsBell />
                 </div>
                 <div className='flex flex-row items-center gap-2 cursor-pointer relative'>
-                    <div className='w-6 h-6 lg:h-10 lg:w-10 rounded-md overflow-hidden'>
+                    <div className='w-6 h-6 lg:h-10 lg:w-10 rounded-md overflow-hidden' onClick={toggleAccountMenu}>
                         <Image src={'/images/default-blue.png'} alt='perfil image' width={'100'} height={'100'}/>
                     </div>
-                    <BsChevronDown className='text-white transition'/>
+                    <BsChevronDown 
+                        className={`text-white transition ${showAccountMenu ? 'rotate-180' : 'rotate-0'}`} 
+                        onClick={toggleAccountMenu}
+                    />
+                    <AccountMenu visible={showAccountMenu}/>
                 </div>
             </div>
         </div>
