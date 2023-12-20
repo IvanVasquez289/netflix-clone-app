@@ -1,5 +1,6 @@
 import React from 'react'
 import { BsInfoCircle } from "react-icons/bs";
+import PlayButton from './PlayButton';
 
 interface BillBoardProps {
     movie: any
@@ -45,6 +46,7 @@ const Billboard: React.FC<BillBoardProps> = ({movie}) => {
                 {movie?.description}
             </p>
             <div className='flex flex-row mt-3 md:mt-4 gap-3'>
+                <PlayButton movieId={movie?.id}/>
                 <button className='
                     bg-white bg-opacity-50 text-white px-2 py-1 md:px-4 md:py-3 text-xs md:text-xl
                     rounded-md flex flex-row items-center font-semibold w-auto gap-2 hover:bg-opacity-20 transition
