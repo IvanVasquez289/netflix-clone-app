@@ -5,7 +5,6 @@ import prismadb from './prismadb'
 
 const serverAuth = async (req: NextApiRequest) => {
     const session = await getSession({req})
-
     if(!session?.user?.email){
         throw new Error('No registrado')
     }
