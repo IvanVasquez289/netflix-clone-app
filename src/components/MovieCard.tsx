@@ -12,8 +12,16 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const router = useRouter()
   const {openModal} = useInfoModal()
+  const anchoVentana = window.innerWidth;
   return (
-    <div className="bg-zinc-900 relative col-span h-[12vw] group">
+    <div 
+      className="bg-zinc-900 relative col-span h-[12vw] group" 
+      onClick={()=> {
+        if(anchoVentana < 600){
+          router.push(`/watch/${data?.id}`)
+        }
+      }}
+    >
       <Image
         src={data?.thumbnail}
         alt="movie"
@@ -47,13 +55,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         >
             <div className="flex flex-row items-center gap-3">
                 <div 
-                    onClick={()=>{}}
+                    onClick={()=> router.push(`/watch/${data?.id}`)}
                     className="
                         cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white 
                         rounded-full flex justify-center items-center transition hover:bg-neutral-300
                     "
                 >
-                    <IoPlay size={30} onClick={()=> router.push(`/watch/${data?.id}`)}/>
+                    <IoPlay size={30} />
                 </div>
                 <FavoriteButton movieId={data?.id}/>
                 <div 
