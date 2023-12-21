@@ -3,12 +3,15 @@ import React from "react";
 import { IoPlay } from "react-icons/io5";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
+import useInfoModal from "@/hooks/useInfoModal";
+import { BsChevronDown} from "react-icons/bs";
+
 interface MovieCardProps {
   data: Record<string, any>;
 }
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
-  console.log(data);
   const router = useRouter()
+  const {openModal} = useInfoModal()
   return (
     <div className="bg-zinc-900 relative col-span h-[12vw] group">
       <Image
@@ -53,6 +56,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                     <IoPlay size={30} onClick={()=> router.push(`/watch/${data?.id}`)}/>
                 </div>
                 <FavoriteButton movieId={data?.id}/>
+                <div 
+                  onClick={()=> openModal(data?.id)}
+                  className="
+                    cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10
+                    border-white border-2 flex justify-center items-center transition hover:border-neutral-300
+                    rounded-full
+                  "
+                >
+                  <BsChevronDown size={20} color="white"/>
+                </div>
             </div>
             <p className="text-green-500 font-semibold mt-4">
                 Nuevo <span className="text-white">2023</span>

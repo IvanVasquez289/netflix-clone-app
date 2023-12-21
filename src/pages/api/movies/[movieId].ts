@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "../../../lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
+import mongoose from "mongoose";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if(req.method !== 'GET'){
@@ -10,7 +11,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     await serverAuth(req)
     const {movieId} = req.query
-   
+    const valid = mongoose.Types.ObjectId.isValid(movieId as string)
+
+    if(!valid){
+      const error = new Error('ID INVALIDO PARA MONGO')
+      return res.status(404).json({msj: error.message})
+    }
+
     if(typeof movieId !== 'string'){
         throw new Error('ID no valido')
     }

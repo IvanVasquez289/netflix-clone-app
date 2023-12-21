@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { BsInfoCircle } from "react-icons/bs";
 import PlayButton from './PlayButton';
+import useInfoModal from '@/hooks/useInfoModal';
 
 interface BillBoardProps {
     movie: any
 }
 
 const Billboard: React.FC<BillBoardProps> = ({movie}) => {
-  console.log(movie)
+
+  const {openModal} = useInfoModal()
+
+  const handleOpenModal = useCallback(()=>{
+    openModal(movie?.id)
+  },[openModal,movie])
+
   return (
     <div className='relative h-[56.25vw]'>
         <video 
@@ -45,7 +52,7 @@ const Billboard: React.FC<BillBoardProps> = ({movie}) => {
             '>
                 {movie?.description}
             </p>
-            <div className='flex flex-row mt-3 md:mt-4 gap-3'>
+            <div className='flex flex-row mt-3 md:mt-4 gap-3' onClick={handleOpenModal}>
                 <PlayButton movieId={movie?.id}/>
                 <button className='
                     bg-white bg-opacity-50 text-white px-2 py-1 md:px-4 md:py-3 text-xs md:text-xl

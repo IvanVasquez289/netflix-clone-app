@@ -12,11 +12,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     <button
         onClick={()=> router.push(`/watch/${movieId}`)}
         className='
-            bg-white rounded-md flex flex-row items-center py-1 md:py-2 px-2 md:px-4 w-auto font-semibold
+            bg-white rounded-md flex flex-row items-center px-2 py-1 md:px-4 md:py-3 w-auto font-semibold
             transition hover:bg-neutral-300
         '
     >
-        <IoPlay size={30} className='mr-1'/>
+        <IoPlay size={20} className='mr-1'/>
         Play
     </button>
   )
